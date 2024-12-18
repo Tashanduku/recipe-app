@@ -237,6 +237,47 @@ body {
     flex-direction: column;
     gap: 1rem;
 }
+.upload__heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+label {
+    font-size: 1rem;
+    color: #555;
+}
+
+input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #ff5c5c;
+}
+
+/* Ingredients Section */
+.ingredient-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ingredient-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.ingredient-row input {
+    flex: 1;
+}
+
+
 /* Message Styles */
 .message {
     display: flex;
