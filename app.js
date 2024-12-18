@@ -187,3 +187,57 @@ const renderBookmarks = () => {
         .map(generateRecipeMarkup)
         .join('');
 };
+
+
+ // Event Handlers
+ searchForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const query = searchInput.value;
+    if (!query) return;
+
+    try {
+        const recipes = await fetchRecipes(query);
+        renderRecipes(recipes);
+    } catch (error) {
+        recipeContainer.innerHTML = `
+            <div class="message">
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
+});
+
+// Handle recipe clicks and bookmarks
+document.addEventListener('click', async e => {
+    // Handle recipe item clicks
+    const recipeItem = e.target.closest('.results__item');
+    if (recipeItem && !e.target.closest('.btn--bookmark')) {
+        const id = recipeItem.dataset.id;
+        try {
+            const response = await fetch(`${API_URL}/lookup.php?i=${id}`);
+            const data = await response.json();
+            renderRecipeDetails(data.meals[0]);
+        } catch (error) {
+            recipeContainer.innerHTML = `
+                <div class="message">
+                    <p>Failed to load recipe details</p>
+                </div>
+            `;
+        }
+    }
+
+    // Handle bookmark button clicks
+    const bookmarkBtn = e.target.closest('.btn--bookmark');
+    if (bookmarkBtn) {
+        const id = bookmarkBtn.dataset.id;
+        toggleBookmark(id);
+    }
+});
+
+
+
+// Add recipe form handling
+addRecipeBtn.addEventListener('click', () => {
+    addRecipeWindow.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+});
