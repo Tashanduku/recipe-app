@@ -151,7 +151,7 @@ body {
     width: 24px;
     height: 24px;
     fill: transparent;
-    stroke: #f38e82;
+    stroke: #f7b8b1;
     stroke-width: 2;
     transition: all 0.3s;
 }
@@ -179,6 +179,7 @@ body {
     display: block;
 }
 
+
 /* Modal Styles */
 .overlay {
     position: fixed;
@@ -205,11 +206,11 @@ body {
     z-index: 1000;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-/* .hidden {
+.hidden {
     display: none !important;
     visibility: hidden;
     opacity: 0;
-} */
+}
 
 /* Close Button */
 .btn--close-modal {
