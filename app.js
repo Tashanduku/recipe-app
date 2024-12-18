@@ -90,3 +90,22 @@ const renderRecipeDetails = (recipe) => {
     `;
 };
 
+ // Add dynamic ingredient fields
+ let ingredientCount = 2; // Initial number of ingredient fields
+
+ addIngredientBtn.addEventListener('click', () => {
+     ingredientCount++;
+     const newIngredientRow = document.createElement('div');
+     newIngredientRow.classList.add('ingredient-row');
+     newIngredientRow.innerHTML = `
+         <input
+             type="text"
+             name="ingredient-${ingredientCount}"
+             placeholder="Format: 'Quantity,Unit,Description'"
+         />
+     `;
+     ingredientContainer.appendChild(newIngredientRow);
+ });
+
+
+ 
