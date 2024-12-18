@@ -108,4 +108,34 @@ const renderRecipeDetails = (recipe) => {
  });
 
 
- 
+ document.querySelector('.upload')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const recipe = {
+        idMeal: Date.now().toString(), // Generate a unique ID for the new recipe
+        strMeal: formData.get('title'),
+        strMealThumb: formData.get('image'),
+        strCategory: formData.get('category'),
+        strInstructions: formData.get('instructions'),
+        ingredients: [],
+    };
+
+    // Collect all dynamic ingredient fields
+    formData.forEach((value, key) => {
+        if (key.startsWith('ingredient-')) {
+            const [quantity, unit, description] = value.split(',');
+            recipe.ingredients.push({ quantity, unit, description });
+        }
+    });
+
+    // Add new recipe to state and re-render
+    state.recipes = state.recipes || []; // Initialize recipes state if not present
+    state.recipes.push(recipe);
+    renderRecipes(state.recipes);
+
+    // Close the modal and reset the form
+    closeModal();
+    e.target.reset();
+    alert('Recipe was successfully uploaded!');
+});
