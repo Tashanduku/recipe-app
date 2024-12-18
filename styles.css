@@ -199,15 +199,12 @@ body {
     width: 90%;
     max-width: 500px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-
-.hidden {
-    display: none !important;
-}
-
 /* Message Styles */
 .message {
     display: flex;
