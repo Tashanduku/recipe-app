@@ -14,3 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const ingredientContainer = document.querySelector('.ingredient-inputs');
     const addIngredientBtn = document.querySelector('.btn--add-ingredient');
 })
+
+ // Fetch Recipes
+ async function fetchRecipes(query) {
+    try {
+        const response = await fetch(`${API_URL}/search.php?s=${query}`);
+        const data = await response.json();
+        return data.meals || [];
+    } catch (error) {
+        throw new Error('Failed to fetch recipes');
+    }
+}
