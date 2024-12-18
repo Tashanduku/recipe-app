@@ -44,3 +44,49 @@ const generateRecipeMarkup = (recipe) => {
         </li>
     `;
 };
+
+
+  // Render Recipes
+  const renderRecipes = (recipes) => {
+    resultsContainer.innerHTML = recipes.map(generateRecipeMarkup).join('');
+};
+
+// Render Recipe Details
+const renderRecipeDetails = (recipe) => {
+    const ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+        if (recipe[`strIngredient${i}`]) {
+            ingredients.push({
+                ingredient: recipe[`strIngredient${i}`],
+                measure: recipe[`strMeasure${i}`],
+            });
+        }
+    }
+
+    const isBookmarked = state.bookmarks.some((b) => b.idMeal === recipe.idMeal);
+
+    recipeContainer.innerHTML = `
+        <div class="recipe__details">
+            <div class="recipe__header">
+                <h2>${recipe.strMeal}</h2>
+                <button class="btn--bookmark ${isBookmarked ? 'bookmarked' : ''}" data-id="${recipe.idMeal}">
+                    <svg class="nav__icon">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </button>
+            </div>
+            <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+            <div class="recipe__info">
+                <h3>Ingredients:</h3>
+                <ul>
+                    ${ingredients.map((ing) => `
+                        <li>${ing.measure} ${ing.ingredient}</li>
+                    `).join('')}
+                </ul>
+                <h3>Instructions:</h3>
+                <p>${recipe.strInstructions}</p>
+            </div>
+        </div>
+    `;
+};
+
