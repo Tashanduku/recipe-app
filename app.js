@@ -241,3 +241,45 @@ addRecipeBtn.addEventListener('click', () => {
     addRecipeWindow.classList.remove('hidden');
     overlay.classList.remove('hidden');
 });
+
+ // Close modal handlers
+ const closeModal = () => {
+    addRecipeWindow.classList.add('hidden');
+    overlay.classList.add('hidden');
+};
+
+overlay.addEventListener('click', closeModal);
+document.querySelector('.btn--close-modal')?.addEventListener('click', closeModal);
+
+// Handle recipe form submission
+document.querySelector('.upload')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const recipe = {
+        title: formData.get('title'),
+        sourceUrl: formData.get('sourceUrl'),
+        image: formData.get('image'),
+        publisher: formData.get('publisher'),
+        cookingTime: formData.get('cookingTime'),
+        servings: formData.get('servings'),
+        ingredients: []
+    };
+
+    // Collect ingredients
+    for (let i = 1; i <= 6; i++) {
+        const ing = formData.get(`ingredient-${i}`);
+        if (ing) {
+            const [quantity, unit, description] = ing.split(',');
+            recipe.ingredients.push({ quantity, unit, description });
+        }
+    }
+
+    // Here you would typically send this to a backend
+    console.log('New Recipe:', recipe);
+    alert('Recipe was successfully uploaded!');
+    closeModal();
+    e.target.reset();
+});
+
+// Initialize bookmarks
+renderBookmarks();
