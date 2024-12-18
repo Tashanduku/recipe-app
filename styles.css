@@ -222,7 +222,21 @@ body {
     cursor: pointer;
     transition: color 0.3s;
 }
+.btn--close-modal:hover {
+    color: #ff5c5c;
+}
 
+.upload {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.upload__column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 /* Message Styles */
 .message {
     display: flex;
