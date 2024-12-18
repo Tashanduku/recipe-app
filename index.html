@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-     <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
     <title>recipe app | Search over 1,000,000 recipes</title>
 </head>
 <body>
@@ -17,8 +18,9 @@
               placeholder="Search recipes..."
             />
             <button class="btn search__btn">
-              <svg class="search__icon">
-                <!--add icon-->
+              <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
               <span>Search</span>
             </button>
@@ -28,16 +30,17 @@
             <ul class="nav__list">
               <li class="nav__item">
                 <button class="nav__btn nav__btn--add-recipe">
-                  <svg class="nav__icon">
-                   <!--add icon-->
+                  <svg class="nav__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
                   </svg>
                   <span>Add recipe</span>
                 </button>
               </li>
               <li class="nav__item">
                 <button class="nav__btn nav__btn--bookmarks">
-                  <svg class="nav__icon">
-                    <!--add icon-->
+                  <svg class="nav__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                   </svg>
                   <span>Bookmarks</span>
                 </button>
@@ -45,13 +48,11 @@
                   <ul class="bookmarks__list">
                     <div class="message">
                       <div>
-                        <svg>
-                        <!--add icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                         </svg>
                       </div>
-                      <p>
-                        No bookmarks yet.
-                      </p>
+                      <p>No bookmarks yet.</p>
                     </div>
                   </ul>
                 </div>
@@ -61,97 +62,66 @@
     </header>
 
     <div class="search-results">
-        <ul class="results">
-         
-        </ul>
+        <ul class="results"></ul>
+        <div class="pagination"></div>
     
-        <div class="pagination">
-         
-        </div>
-    
-      <div class="recipe">
-        <div class="message">
-          <div>
-            <svg>
-            <!--add icon-->
-            </svg>
+        <div class="recipe">
+          <div class="message">
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="16"></line>
+                <line x1="8" y1="12" x2="16" y2="12"></line>
+              </svg>
+            </div>
+            <p>Start by searching for a recipe or an ingredient.</p>
           </div>
-          <p>Start by searching for a recipe or an ingredient.</p>
         </div>
-    </div>
     </div>
 
     <div class="overlay hidden"></div>
-<div class="add-recipe-window hidden">
-<button class="btn--close-modal">&times;</button>
-<form class="upload">
-<div class="upload__column">
-  <h3 class="upload__heading">Recipe data</h3>
-  <label>Title</label>
-  <input value="1" required name="title" type="text" />
-  <label>URL</label>
-  <input value="2" required name="sourceUrl" type="text" />
-  <label>Image URL</label>
-  <input value="3" required name="image" type="text" />
-  <label>Publisher</label>
-  <input value="4" required name="publisher" type="text" />
-  <label>Prep time</label>
-  <input value="5" required name="cookingTime" type="number" />
-  <label>Servings</label>
-  <input value="6" required name="servings" type="number" />
-</div>
-
- <div class="upload__column">
-    <h3 class="upload__heading">Ingredients</h3>
-    <label>Ingredient 1</label>
-    <input
-      value="0.5,kg,Rice"
-      type="text"
-      required
-      name="ingredient-1"
-      placeholder="Format: 'Quantity,Unit,Description'"
-    />
-    <label>Ingredient 2</label>
-    <input
-      value="1,,Ugali"
-      type="text"
-      name="ingredient-2"
-      placeholder="Format: 'Quantity,Unit,Description'"
-    />
-    <label>Ingredient 3</label>
-    <input
-      value=",,Sukuma"
-      type="text"
-      name="ingredient-3"
-      placeholder="Format: 'Quantity,Unit,Description'"
-    />
-    <label>Ingredient 4</label>
-    <input
-      type="text"
-      name="ingredient-4"
-      placeholder="Format: 'Quantity,Unit,Description'"
-    />
-    <label>Ingredient 5</label>
-    <input
-      type="text"
-      name="ingredient-5"
-      placeholder="Format: 'Quantity,Unit,Description'"
-    />
-    <label>Ingredient 6</label>
-    <input
-      type="text"
-      name="ingredient-6"
-      placeholder="Format: 'Quantity,Unit,Description'"
-    />
-  </div>
-  <button class="btn upload__btn">
-    <svg>
-      <!--rem use icon-->
-    </svg>
-    <span>Upload</span>
-  </button>
-  </form>
-   </div> 
+    <div class="add-recipe-window hidden">
+        <button class="btn--close-modal">&times;</button>
+        <form class="upload">
+            <div class="upload__column">
+                <h3 class="upload__heading">Recipe Data</h3>
+                <label for="title">Title</label>
+                <input id="title" required name="title" type="text" />
+                <label for="sourceUrl">URL</label>
+                <input id="sourceUrl" required name="sourceUrl" type="text" />
+                <label for="image">Image URL</label>
+                <input id="image" required name="image" type="text" />
+                <label for="publisher">Publisher</label>
+                <input id="publisher" required name="publisher" type="text" />
+                <label for="cookingTime">Prep Time</label>
+                <input id="cookingTime" required name="cookingTime" type="number" />
+                <label for="servings">Servings</label>
+                <input id="servings" required name="servings" type="number" />
+            </div>
+    
+            <div class="upload__column">
+                <h3 class="upload__heading">Ingredients</h3>
+                <div class="ingredient-inputs">
+                    <div class="ingredient-row">
+                        <input type="text" name="ingredient-1" placeholder="Format: 'Quantity,Unit,Description'" required />
+                    </div>
+                    <div class="ingredient-row">
+                        <input type="text" name="ingredient-2" placeholder="Format: 'Quantity,Unit,Description'" />
+                    </div>
+                </div>
+                <button type="button" class="btn--add-ingredient">+</button>
+            </div>
+    
+            <button type="submit" class="btn upload__btn">
+                <svg>
+                    <use href="src/img/icons.svg#icon-upload-cloud"></use>
+                </svg>
+                <span>Upload</span>
+            </button>
+        </form>
+    </div>
+    
+    
    <script src="app.js"></script>
 </body>
 </html>
