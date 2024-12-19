@@ -52,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="recipe__exit hidden">
             <button class="btn--exit">&times;</button>
           </div>
-          <div class="message">
-            <p>Start by searching for a recipe or an ingredient.</p>
-            <button class="btn--random">Add Random Recipe</button>
-          </div>
+         
         `;
     };
 

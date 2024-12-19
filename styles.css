@@ -161,6 +161,9 @@ body {
 .recipe__info h3 {
     margin: 1.5rem 0 0.5rem;
 }
+.recipe p {
+text-align: center;
+}
 .nav__item {
     position: relative;
 }
