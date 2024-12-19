@@ -226,3 +226,38 @@ const closeModal = () => {
 
 overlay.addEventListener('click', closeModal);
 document.querySelector('.btn--close-modal')?.addEventListener('click', closeModal);
+
+// Handle recipe form submission
+document.querySelector('.upload')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const recipe = {
+        idMeal: Date.now().toString(),
+        strMeal: formData.get('title'),
+        strMealThumb: formData.get('image'),
+        strCategory: formData.get('category'),
+        strInstructions: formData.get('instructions'),
+        ingredients: [],
+    };
+
+    formData.forEach((value, key) => {
+        if (key.startsWith('ingredient-')) {
+            const [quantity, unit, description] = value.split(',');
+            recipe.ingredients.push({ quantity, unit, description });
+        }
+    });
+
+    state.recipes = state.recipes || [];
+    state.recipes.push(recipe);
+    renderRecipes(state.recipes);
+
+    closeModal();
+    e.target.reset();
+    alert('Recipe was successfully uploaded!');
+});
+
+// Initialize bookmarks
+renderBookmarks();
+});
+
