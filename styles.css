@@ -142,24 +142,24 @@ body {
 .bookmarks {
     position: absolute;
     right: 0;
-    top: 100%;
-    background: #fff;
+    top: calc(100% + 30px); 
+    background: #ddc4c4;
     width: 400px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 1rem;
     z-index: 100;
-    opacity: 1; /* Ensure it's visible */
-    visibility: visible; /* Make sure it's accessible */
+    opacity: 1; 
+    visibility: visible; 
     transition: all 0.3s ease;
 }
 
-/* /* .nav__btn--bookmarks:hover + .bookmarks,
+.nav__btn--bookmarks:hover + .bookmarks,
 .bookmarks:hover {
     opacity: 1;
     visibility: visible;
-} */
-  */
+} 
+   
 
 .bookmarks__list {
     list-style: none;
