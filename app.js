@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const API_URL = 'https://www.themealdb.com/api/json/v1/1';
 
@@ -47,7 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
         return formattedRecipe;
     };
 
-    // Fetch Recipes (now includes local recipes)
+    // Reset recipe view to initial state
+    const resetRecipeView = () => {
+        recipeContainer.innerHTML = `
+          <div class="recipe__exit hidden">
+            <button class="btn--exit">&times;</button>
+          </div>
+          <div class="message">
+            <p>Start by searching for a recipe or an ingredient.</p>
+            <button class="btn--random">Add Random Recipe</button>
+          </div>
+        `;
+    };
+
+    // Fetch Recipes (includes local recipes)
     async function fetchRecipes(query) {
         try {
             // Search local recipes first
@@ -68,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Generate Recipe Markup (unchanged)
+    // Generate Recipe Markup
     const generateRecipeMarkup = (recipe) => {
         const isBookmarked = state.bookmarks.some((b) => b.idMeal === recipe.idMeal);
         return `
@@ -87,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     };
 
-    // Render Recipes (unchanged)
+    // Render Recipes
     const renderRecipes = (recipes) => {
         resultsContainer.innerHTML = recipes.map(generateRecipeMarkup).join('');
     };
@@ -107,6 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const isBookmarked = state.bookmarks.some((b) => b.idMeal === recipe.idMeal);
 
         recipeContainer.innerHTML = `
+            <div class="recipe__exit">
+                <button class="btn--exit">&times;</button>
+            </div>
             <div class="recipe__details">
                 <div class="recipe__header">
                     <h2>${recipe.strMeal}</h2>
@@ -131,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     };
 
-    // Get recipe by ID (now checks local recipes first)
+    // Get recipe by ID (checks local recipes first)
     const getRecipeById = async (id) => {
         // Check local recipes first
         const localRecipe = state.localRecipes.find(recipe => recipe.idMeal === id);
@@ -164,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .join('');
     };
 
-    // Toggle Bookmark (updated to use getRecipeById)
+    // Toggle Bookmark
     const toggleBookmark = async (recipeId) => {
         try {
             const recipe = await getRecipeById(recipeId);
@@ -188,13 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Handle recipe form submission (updated)
+    // Handle recipe form submission
     document.querySelector('.upload')?.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
         const recipe = {
-            idMeal: `local_${Date.now()}`, // Prefix with 'local_' to distinguish from API recipes
+            idMeal: `local_${Date.now()}`, 
             strMeal: formData.get('title'),
             strMealThumb: formData.get('image'),
             strCategory: formData.get('category'),
@@ -218,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update UI
         closeModal();
         e.target.reset();
-        renderRecipes([formattedRecipe]); // Show the new recipe
+        renderRecipes([formattedRecipe]); 
         alert('Recipe was successfully uploaded!');
     });
 
@@ -246,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderBookmarks();
     });
 
-    // Handle recipe clicks and bookmarks
+    // Handle recipe clicks, bookmarks, and exit button
     document.addEventListener('click', async e => {
         // Handle recipe item clicks
         const recipeItem = e.target.closest('.results__item');
@@ -272,11 +287,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = bookmarkBtn.dataset.id;
             toggleBookmark(id);
         }
+
+        // Handle exit button clicks
+        if (e.target.closest('.btn--exit')) {
+            resetRecipeView();
+        }
     });
 
     // Add dynamic ingredient fields
     let ingredientCount = 2;
-
     addIngredientBtn.addEventListener('click', () => {
         ingredientCount++;
         const newIngredientRow = document.createElement('div');
@@ -309,4 +328,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize
     renderBookmarks();
 });
-
