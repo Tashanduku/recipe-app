@@ -194,3 +194,20 @@ document.addEventListener('click', async e => {
         toggleBookmark(id);
     }
 });
+
+// Add dynamic ingredient fields
+let ingredientCount = 2;
+
+addIngredientBtn.addEventListener('click', () => {
+    ingredientCount++;
+    const newIngredientRow = document.createElement('div');
+    newIngredientRow.classList.add('ingredient-row');
+    newIngredientRow.innerHTML = `
+        <input
+            type="text"
+            name="ingredient-${ingredientCount}"
+            placeholder="Format: 'Quantity,Unit,Description'"
+        />
+    `;
+    ingredientContainer.appendChild(newIngredientRow);
+});
