@@ -145,4 +145,20 @@ const renderBookmarks = () => {
         .map(generateRecipeMarkup)
         .join('');
 };
+// Event Handlers
+searchForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const query = searchInput.value;
+    if (!query) return;
 
+    try {
+        const recipes = await fetchRecipes(query);
+        renderRecipes(recipes);
+    } catch (error) {
+        recipeContainer.innerHTML = `
+            <div class="message">
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
+});
