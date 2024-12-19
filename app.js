@@ -162,3 +162,10 @@ searchForm.addEventListener('submit', async e => {
         `;
     }
 });
+
+// Toggle bookmarks list visibility
+bookmarksBtn.addEventListener('click', () => {
+    bookmarksListContainer.classList.toggle('hidden');
+    renderBookmarks();
+});
+
