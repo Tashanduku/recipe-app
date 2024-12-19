@@ -36,3 +36,27 @@ async function fetchRecipes(query) {
         throw new Error('Failed to fetch recipes');
     }
 }
+
+// Generate Recipe Markup
+const generateRecipeMarkup = (recipe) => {
+    const isBookmarked = state.bookmarks.some((b) => b.idMeal === recipe.idMeal);
+    return `
+        <li class="results__item" data-id="${recipe.idMeal}">
+            <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+            <div>
+                <h4>${recipe.strMeal}</h4>
+                <p>${recipe.strCategory || ''}</p>
+                <button class="btn--bookmark ${isBookmarked ? 'bookmarked' : ''}" data-id="${recipe.idMeal}">
+                    <svg class="nav__icon">
+                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </li>
+    `;
+};
+
+// Render Recipes
+const renderRecipes = (recipes) => {
+    resultsContainer.innerHTML = recipes.map(generateRecipeMarkup).join('');
+};
