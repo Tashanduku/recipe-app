@@ -168,4 +168,29 @@ bookmarksBtn.addEventListener('click', () => {
     bookmarksListContainer.classList.toggle('hidden');
     renderBookmarks();
 });
+// Handle recipe clicks and bookmarks
+document.addEventListener('click', async e => {
+    // Handle recipe item clicks
+    const recipeItem = e.target.closest('.results__item');
+    if (recipeItem && !e.target.closest('.btn--bookmark')) {
+        const id = recipeItem.dataset.id;
+        try {
+            const response = await fetch(`${API_URL}/lookup.php?i=${id}`);
+            const data = await response.json();
+            renderRecipeDetails(data.meals[0]);
+        } catch (error) {
+            recipeContainer.innerHTML = `
+                <div class="message">
+                    <p>Failed to load recipe details</p>
+                </div>
+            `;
+        }
+    }
 
+    // Handle bookmark button clicks
+    const bookmarkBtn = e.target.closest('.btn--bookmark');
+    if (bookmarkBtn) {
+        const id = bookmarkBtn.dataset.id;
+        toggleBookmark(id);
+    }
+});
