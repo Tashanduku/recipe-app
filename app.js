@@ -26,3 +26,13 @@ const persistBookmarks = () => {
     localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
 };
 
+// Fetch Recipes
+async function fetchRecipes(query) {
+    try {
+        const response = await fetch(`${API_URL}/search.php?s=${query}`);
+        const data = await response.json();
+        return data.meals || [];
+    } catch (error) {
+        throw new Error('Failed to fetch recipes');
+    }
+}
