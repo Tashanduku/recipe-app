@@ -100,3 +100,27 @@ const renderRecipeDetails = (recipe) => {
     `;
 };
 
+// Toggle Bookmark
+const toggleBookmark = async (recipeId) => {
+    try {
+        const response = await fetch(`${API_URL}/lookup.php?i=${recipeId}`);
+        const data = await response.json();
+        const recipe = data.meals[0];
+
+        const index = state.bookmarks.findIndex((b) => b.idMeal === recipeId);
+        if (index === -1) {
+            state.bookmarks.push(recipe);
+        } else {
+            state.bookmarks.splice(index, 1);
+        }
+
+        persistBookmarks();
+        renderBookmarks();
+
+        // Update bookmark button in recipes and details
+        document.querySelectorAll(`.btn--bookmark[data-id="${recipeId}"]`)
+            .forEach((btn) => btn.classList.toggle('bookmarked'));
+    } catch (error) {
+        console.error('Error toggling bookmark:', error);
+    }
+};
