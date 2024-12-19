@@ -239,7 +239,7 @@ body {
     transform: translate(-50%, -50%);
     width: 90%;
     max-width: 500px;
-    background-color: #fff;
+    background-color: #ebe7e7;
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -323,7 +323,7 @@ input:focus {
     padding: 0.4rem 0.8rem; 
     font-size: 1rem; 
     color: #fff;
-    background-color: #ff5c5c;
+    background-color:#8b6161;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -331,7 +331,7 @@ input:focus {
 }
 
 .btn--add-ingredient:hover {
-    background-color: #ff3e3e;
+    background-color: #5f3d3d
 }
 
 /* Upload Button */
@@ -341,7 +341,7 @@ input:focus {
     justify-content: center; 
     padding: 0.4rem 0.8rem; 
     font-size: 1.4rem; 
-    background-color: #ff5c5c; 
+    background-color: #8b6161; 
     color: #fff;
     border: none;
     border-radius: 4px; 
@@ -353,7 +353,7 @@ input:focus {
 }
 
 .upload__btn:hover {
-    background-color: #ff3e3e; 
+    background-color: #5f3d3d
 }
 
 .upload__btn svg {
