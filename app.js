@@ -16,4 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const ingredientContainer = document.querySelector('.ingredient-inputs');
     const addIngredientBtn = document.querySelector('.btn--add-ingredient');
 
-})
+// State Management
+const state = {
+    bookmarks: JSON.parse(localStorage.getItem('bookmarks') || '[]'),
+};
+
+// Save bookmarks to localStorage
+const persistBookmarks = () => {
+    localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
+
