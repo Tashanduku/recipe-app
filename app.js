@@ -211,3 +211,18 @@ addIngredientBtn.addEventListener('click', () => {
     `;
     ingredientContainer.appendChild(newIngredientRow);
 });
+
+// Add recipe form handling
+addRecipeBtn.addEventListener('click', () => {
+    addRecipeWindow.classList.remove('hidden');
+    overlay.classList.remove('hidden');
+});
+
+// Close modal handlers
+const closeModal = () => {
+    addRecipeWindow.classList.add('hidden');
+    overlay.classList.add('hidden');
+};
+
+overlay.addEventListener('click', closeModal);
+document.querySelector('.btn--close-modal')?.addEventListener('click', closeModal);
