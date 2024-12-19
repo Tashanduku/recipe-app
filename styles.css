@@ -135,48 +135,88 @@ body {
 .recipe__info h3 {
     margin: 1.5rem 0 0.5rem;
 }
-
-/* Bookmark Button Styles */
-.btn--bookmark {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+.nav__item {
+    position: relative;
 }
 
-.btn--bookmark svg {
-    width: 24px;
-    height: 24px;
-    fill: transparent;
-    stroke: #f7b8b1;
-    stroke-width: 2;
-    transition: all 0.3s;
-}
-
-.btn--bookmark.bookmarked svg {
-    fill: #f38e82;
-}
-
-
-/* Bookmarks Styles */
 .bookmarks {
     position: absolute;
     right: 0;
     top: 100%;
     background: #fff;
     width: 400px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     border-radius: 5px;
     padding: 1rem;
-    display: none;
+    z-index: 100;
+    opacity: 1; /* Ensure it's visible */
+    visibility: visible; /* Make sure it's accessible */
+    transition: all 0.3s ease;
 }
 
-.nav__btn--bookmarks:hover + .bookmarks,
+/* /* .nav__btn--bookmarks:hover + .bookmarks,
 .bookmarks:hover {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+} */
+  */
+
+.bookmarks__list {
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.bookmarks__item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.bookmarks__item:hover {
+    background-color: #f5f5f5;
+}
+
+.bookmarks__item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.bookmarks__item h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.bookmarks__item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Update bookmark button styles */
+.btn--bookmark {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.btn--bookmark svg {
+    width: 24px;
+    height: 24px;
+    stroke: #f38e82;
+    fill: none;
+    transition: all 0.3s;
+}
+
+.btn--bookmark.bookmarked svg {
+    fill: #82b3f3;
 }
 
 
@@ -226,7 +266,7 @@ body {
 }
 
 .btn--close-modal:hover {
-    color: #ff5c5c;
+    color: #c7a8a8;
 }
 
 /* Form Layout */
@@ -325,10 +365,53 @@ input:focus {
 
 
 /* Message Styles */
-.message {
+
+.results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Pagination styles
+  .pagination {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    color: #666;
-}
+    gap: 10px;
+  } */
+  
+  /* Recipe message styles */
+  
+  
+  .message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .icon svg {
+    stroke: #555;
+  }
+  
+  .message p {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Button styles */
+  .btn--random {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn--random:hover {
+    background-color: #0056b3;
+  }
