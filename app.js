@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="recipe__exit hidden">
             <button class="btn--exit">&times;</button>
           </div>
-         
         `;
     };
 
