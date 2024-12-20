@@ -111,5 +111,5 @@ The application uses localStorage to persist:
 - Minimal dependencies
 
 ## Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! 
 
