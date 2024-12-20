@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // State Management
     const state = {
         bookmarks: JSON.parse(localStorage.getItem('bookmarks') || '[]'),
-        localRecipes: JSON.parse(localStorage.getItem('localRecipes') || '[]')
+        localRecipes: JSON.parse(localStorage.getItem('localRecipes') || '[]'),
+        searchResults: []
     };
 
     // Save state to localStorage
@@ -48,11 +49,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Reset recipe view to initial state
     const resetRecipeView = () => {
-        recipeContainer.innerHTML = `
-          <div class="recipe__exit hidden">
-            <button class="btn--exit">&times;</button>
-          </div>
+        recipeContainer.innerHTML = '<p>Start by searching for a recipe.</p>';
+    };
+
+    // Reset search results
+    const resetSearchResults = () => {
+        resultsContainer.innerHTML = '';
+        searchInput.value = '';
+        state.searchResults = [];
+    };
+
+    // Add exit button to results container
+    const addExitButton = () => {
+        const exitButton = document.createElement('button');
+        exitButton.className = 'btn--exit-search';
+        exitButton.innerHTML = '&times;';
+        exitButton.style.cssText = `
+            position: relative
+            right: 10px;
+            background: #8a5a57;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.2s;
         `;
+        resultsContainer.insertBefore(exitButton, resultsContainer.firstChild);
+
+        exitButton.addEventListener('mouseover', () => {
+            exitButton.style.backgroundColor = '#d32f2f';
+            exitButton.style.transform = 'scale(1.1)';
+        });
+
+        exitButton.addEventListener('mouseout', () => {
+            exitButton.style.backgroundColor = '#8a5a57';
+            exitButton.style.transform = 'scale(1)';
+        });
+
+        exitButton.addEventListener('click', () => {
+            resetSearchResults();
+            resetRecipeView();
+        });
     };
 
     // Fetch Recipes (includes local recipes)
@@ -70,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const apiResults = data.meals || [];
 
             // Combine results, with local recipes first
-            return [...localResults, ...apiResults];
+            state.searchResults = [...localResults, ...apiResults];
+            return state.searchResults;
         } catch (error) {
             throw new Error('Failed to fetch recipes');
         }
@@ -97,7 +139,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render Recipes
     const renderRecipes = (recipes) => {
-        resultsContainer.innerHTML = recipes.map(generateRecipeMarkup).join('');
+        resultsContainer.innerHTML = '';
+        if (recipes.length > 0) {
+            resultsContainer.innerHTML = recipes.map(generateRecipeMarkup).join('');
+            addExitButton();
+        } else {
+            resultsContainer.innerHTML = `
+                <div class="message">
+                    <p>No recipes found. Try another search!</p>
+                </div>
+            `;
+        }
     };
 
     // Render Recipe Details
@@ -236,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event Handlers
     searchForm.addEventListener('submit', async e => {
         e.preventDefault();
-        const query = searchInput.value;
+        const query = searchInput.value.trim();
         if (!query) return;
 
         try {
@@ -321,6 +373,6 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.addEventListener('click', closeModal);
     document.querySelector('.btn--close-modal')?.addEventListener('click', closeModal);
 
-    // Initialize
     renderBookmarks();
+    resetRecipeView();
 });
