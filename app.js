@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             transition: background-color 0.3s, transform 0.2s;
         `;
         resultsContainer.insertBefore(exitButton, resultsContainer.firstChild);
-
+// listener for the exit button
         exitButton.addEventListener('mouseover', () => {
             exitButton.style.backgroundColor = '#d32f2f';
             exitButton.style.transform = 'scale(1.1)';
